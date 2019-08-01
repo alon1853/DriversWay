@@ -9,12 +9,18 @@ function App() {
             <header>
                 <h1>
                     <span role="img" aria-label="truck">🚚</span>
-                    <span>Drivers Way</span>
+                    <span> Drivers Way</span>
                 </h1>
             </header>
+
             <div className="content">
-                <DriversList />
-                <Map />
+                <div className="first">
+                    <DriversList />
+                </div>
+
+                <div className="second">
+                    <Map />
+                </div>
             </div>
         </div>
     );

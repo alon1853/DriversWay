@@ -8,18 +8,19 @@
 
   h1 {
     font-size: 24pt;
+    margin-bottom: 50px;
   }
 
   .content {
     display: flex;
     flex-direction: row;
 
-    &:first-child {
-      flex: 40%;
+    .first {
+      flex: 40% 1;
     }
 
-    &:last-child {
-      flex: 60%;
+    .second {
+      flex: 60% 1;
     }
   }
 }
