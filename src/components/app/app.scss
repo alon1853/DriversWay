@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+.app-container {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  margin: 0 auto;
+  width: 80%;
+
+  h1 {
+    font-size: 24pt;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+
+    &:first-child {
+      flex: 40%;
+    }
+
+    &:last-child {
+      flex: 60%;
+    }
+  }
+}
