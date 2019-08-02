@@ -5,13 +5,14 @@
   width: 80%;
 
   h1 {
-    font-size: 24pt;
+    font-size: 22pt;
     margin-bottom: 50px;
   }
 
-  .content {
+  .row {
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
 
     .first {
       flex: 40% 1;

@@ -52,7 +52,7 @@ code {
 
   .component-title {
     font-weight: 300;
-    font-size: 24px;
+    font-size: 18px;
     background-color: #fcfcfc;
   }
 
@@ -88,5 +88,18 @@ code {
     border-color: #e74c3c;
     color: #e74c3c;
     background-image: linear-gradient(to right, #e74c3c, #e74c3c);
+  }
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+
+  th {
+    font-size: 14px;
+  }
+
+  th, td {
+    padding-bottom: 10px;
   }
 }

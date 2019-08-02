@@ -3,6 +3,8 @@ import './app.scss';
 import Map from '../map/map';
 import DriversList from '../drivers-list/drivers-list';
 import observableDriversList from '../../stores/drivers-store';
+import TasksList from '../tasks-list/tasks-list';
+import observableTasksList from '../../stores/tasks-store';
 
 function App() {
     return (
@@ -14,7 +16,7 @@ function App() {
                 </h1>
             </header>
 
-            <div className="content">
+            <div className="row">
                 <div className="first">
                     <DriversList store={observableDriversList} />
                 </div>
@@ -23,6 +25,8 @@ function App() {
                     <Map />
                 </div>
             </div>
+
+            <TasksList store={observableTasksList} />
         </div>
     );
 }
