@@ -5,8 +5,32 @@ import Driver from './driver/driver';
 
 const DriversList = observer(
     class DriversList extends Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                filterValue: ''
+            }
+
+            this.handleFilterChange = this.handleFilterChange.bind(this);
+        }
+
+        getFilteredDrivers() {
+            if (this.state.filterValue) {
+                return this.props.store.drivers.filter(
+                    (driver) => driver.name.toLowerCase().includes(this.state.filterValue.toLowerCase())
+                );
+            }
+
+            return this.props.store.drivers;
+        }
+
+        handleFilterChange(event) {
+            this.setState({ filterValue: event.target.value });
+        }
+
         render() {
-            const drivers = this.props.store.drivers.map((driver) =>
+            const drivers = this.getFilteredDrivers().map((driver) =>
                 <Driver key={driver.id} driver={driver} />
             );
 
@@ -18,7 +42,7 @@ const DriversList = observer(
 
                     <div className="component-row search-container">
                         <i className="material-icons">search</i>
-                        <input type="text" placeholder="Filter name.." />
+                        <input type="text" value={this.state.filterValue} onChange={this.handleFilterChange} placeholder="Filter name.." />
                     </div>
 
                     <div className="component-devider"></div>

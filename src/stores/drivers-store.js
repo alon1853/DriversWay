@@ -3,7 +3,7 @@ import { decorate, observable } from 'mobx';
 class ObservableDriversStore {
     drivers = [{
         id: 1,
-        name: 'Alex Alex',
+        name: 'Hello World',
         age: 30,
         location: {
             latitude: 33,
@@ -15,7 +15,7 @@ class ObservableDriversStore {
     },
     {
         id: 2,
-        name: 'Alon Alon',
+        name: 'Alon Yosef',
         age: 24,
         location: {
             latitude: 33,
