@@ -13,7 +13,7 @@ class TasksStore {
     {
         id: 2,
         title: 'Task #2',
-        driverId: 1,
+        driverId: 2,
         location: {
             latitude: 34,
             longitude: 34

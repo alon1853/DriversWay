@@ -1,4 +1,4 @@
-import { decorate, observable } from 'mobx';
+import { decorate, computed, observable } from 'mobx';
 
 class ObservableDriversStore {
     drivers = [{
@@ -10,8 +10,7 @@ class ObservableDriversStore {
             longitude: 33
         },
         picture: '',
-        phone: '+972521234567',
-        tasks: []
+        phone: '+972521234567'
     },
     {
         id: 2,
@@ -22,17 +21,42 @@ class ObservableDriversStore {
             longitude: 33
         },
         picture: '',
-        phone: '+972521234567',
-        tasks: []
+        phone: '+972521234567'
     }];
+
+    driverFilter = '';
+
+    get filteredDrivers() {
+        if (this.driverFilter) {
+            return this.drivers.filter(
+                (driver) => driver.name.toLowerCase().includes(this.driverFilter.toLowerCase())
+            );
+        }
+
+        return this.drivers;
+    }
 
     addDriver(driver) {
         this.drivers.push(driver);
     }
+
+    deleteDriver(driverId) {
+        const index = this.drivers.findIndex((driver) => driver.id === driverId);
+
+        if (index !== -1) {
+            this.drivers.splice(index, 1);
+        }
+    }
+
+    setDriverFilter(filter) {
+        this.driverFilter = filter;
+    }
 }
 
 decorate(ObservableDriversStore, {
-    drivers: observable
+    drivers: observable,
+    driverFilter: observable,
+    filteredDrivers: computed
 });
 
 const observableDriversStore = new ObservableDriversStore();

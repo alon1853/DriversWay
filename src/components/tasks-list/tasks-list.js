@@ -19,13 +19,15 @@ const TasksList = observer(
                         <div className="component-row">
                             <table className="table">
                                 <thead>
-                                    <th>Title</th>
-                                    <th>Scheduled For</th>
-                                    <th>Assign To</th>
-                                    <th>Address</th>
-                                    <th>Latitude</th>
-                                    <th>Longitude</th>
-                                    <th>Display</th>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Scheduled For</th>
+                                        <th>Assign To</th>
+                                        <th>Address</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Display</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     {tasks}
