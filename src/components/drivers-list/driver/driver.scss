@@ -1,0 +1,33 @@
+.driver-container {
+    .driver-details, .driver-actions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .driver-details {
+        img {
+            width: 48px;
+            height: 48px;
+            margin-right: 15px;
+        }
+
+        .age {
+            color: grey;
+            font-size: 13px;
+        }
+    }
+
+    .driver-actions {
+        margin-top: 10px;
+        justify-content: space-between;
+
+        .btn.primary {
+            margin-right: 10px;
+        }
+    }
+}
+
+.driver-container:not(:last-child) {
+    margin-bottom: 30px;
+}
