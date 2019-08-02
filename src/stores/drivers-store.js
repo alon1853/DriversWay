@@ -4,6 +4,10 @@ class ObservableDriversStore {
     drivers = [{
         id: 1,
         name: 'Alex'
+    },
+    {
+        id: 2,
+        name: 'Alon'
     }];
 
     addDriver(driver) {
