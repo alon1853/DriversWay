@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import './driver.scss';
 
 class Driver extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleRemove = this.handleRemove.bind(this);
+    }
+
+    handleRemove() {
+        this.props.deleteDriver(this.props.driver.id);
+    }
+
     render() {
         return (
             <div className="driver-container">
@@ -17,7 +27,7 @@ class Driver extends Component {
                     <span>Tasks: 0</span>
                     <div>
                         <button type="button" className="btn primary">Location</button>
-                        <button type="button" className="btn error">Remove</button>
+                        <button type="button" className="btn error" onClick={this.handleRemove}>Remove</button>
                     </div>
                 </div>
             </div>

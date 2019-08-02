@@ -5,7 +5,7 @@ import Task from './task/task';
 const TasksList = observer(
     class TasksList extends Component {
         render() {
-            const tasks = this.props.store.tasks.map((task) =>
+            const tasks = this.props.store.filteredTasks.map((task) =>
                 <Task key={task.id} task={task} />
             );
 

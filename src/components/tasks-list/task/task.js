@@ -5,8 +5,8 @@ class Task extends Component {
         return (
             <tr>
                 <td>{this.props.task.title}</td>
+                <td>{this.props.task.scheduledFor}</td>
                 <td>{this.props.task.driverId}</td>
-                <td>Assign To</td>
                 <td>{this.props.task.address}</td>
                 <td>{this.props.task.location.latitude}</td>
                 <td>{this.props.task.location.longitude}</td>

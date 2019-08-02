@@ -9,15 +9,20 @@ const DriversList = observer(
             super(props);
 
             this.handleFilterChange = this.handleFilterChange.bind(this);
+            this.deleteDriver = this.deleteDriver.bind(this);
         }
 
         handleFilterChange(event) {
             this.props.store.setDriverFilter(event.target.value);
         }
 
+        deleteDriver(driverId) {
+            this.props.store.deleteDriver(driverId);
+        }
+
         render() {
             const drivers = this.props.store.filteredDrivers.map((driver) =>
-                <Driver key={driver.id} driver={driver} />
+                <Driver key={driver.id} driver={driver} deleteDriver={this.deleteDriver} />
             );
 
             return (
@@ -31,7 +36,7 @@ const DriversList = observer(
                         <input type="text"
                             value={this.props.store.driverFilter}
                             onChange={this.handleFilterChange}
-                            placeholder="Filter name.."
+                            placeholder="Filter name"
                         />
                     </div>
 

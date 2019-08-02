@@ -1,4 +1,4 @@
-import { decorate, computed, observable } from 'mobx';
+import { decorate, computed, action, observable } from 'mobx';
 
 class ObservableDriversStore {
     drivers = [{
@@ -56,7 +56,10 @@ class ObservableDriversStore {
 decorate(ObservableDriversStore, {
     drivers: observable,
     driverFilter: observable,
-    filteredDrivers: computed
+    filteredDrivers: computed,
+    addDriver: action,
+    deleteDriver: action,
+    setDriverFilter: action
 });
 
 const observableDriversStore = new ObservableDriversStore();
