@@ -2,6 +2,7 @@ import React from 'react';
 import './app.scss';
 import Map from '../map/map';
 import DriversList from '../drivers-list/drivers-list';
+import observableDriversList from '../../stores/drivers-store';
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
 
             <div className="content">
                 <div className="first">
-                    <DriversList />
+                    <DriversList store={observableDriversList} />
                 </div>
 
                 <div className="second">
