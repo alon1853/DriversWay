@@ -1,4 +1,4 @@
-import { computed, observable } from 'mobx';
+import { computed, observable, action } from 'mobx';
 
 class ObservableDriversStore {
     @observable drivers = [{
@@ -24,31 +24,40 @@ class ObservableDriversStore {
         phone: '+972521234567'
     }];
 
+    @observable driversMap = new Map();
     @observable driverFilter = '';
+
+    constructor() {
+        this.initDriversMap();
+    }
+
+    @action initDriversMap() {
+        for (const driver of this.drivers) {
+            this.addDriver(driver);
+        }
+    }
 
     @computed get filteredDrivers() {
         if (this.driverFilter) {
-            return this.drivers.filter(
+            return Array.from(this.driversMap.values()).filter(
                 (driver) => driver.name.toLowerCase().includes(this.driverFilter.toLowerCase())
             );
         }
 
-        return this.drivers;
+        return Array.from(this.driversMap.values());
     }
 
-    addDriver(driver) {
-        this.drivers.push(driver);
+    @action addDriver(driver) {
+        this.driversMap.set(driver.id, driver);
     }
 
-    deleteDriver(driverId) {
-        const index = this.drivers.findIndex((driver) => driver.id === driverId);
-
-        if (index !== -1) {
-            this.drivers.splice(index, 1);
+    @action deleteDriver(driverId) {
+        if (this.driversMap.has(driverId)) {
+            this.driversMap.delete(driverId);
         }
     }
 
-    setDriverFilter(filter) {
+    @action setDriverFilter(filter) {
         this.driverFilter = filter;
     }
 }
