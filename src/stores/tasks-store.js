@@ -45,9 +45,9 @@ class TasksStore {
             this.handleDriversFilterChange();
         });
 
-        observe(observableDriversStore.driversMap, (change) => {
-            console.log(change);
-        });
+        // observe(observableDriversStore.driversMap, (change) => {
+        // console.log(change);
+        // });
     }
 
     @action initTasksList() {

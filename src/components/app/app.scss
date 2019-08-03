@@ -15,11 +15,15 @@
     margin-bottom: 20px;
 
     .first {
-      flex: 40% 1;
+      flex: 39% 1;
     }
 
     .second {
-      flex: 60% 1;
+      flex: 59% 1;
+    }
+  
+    .space {
+      flex: 2% 1;
     }
   }
 }
