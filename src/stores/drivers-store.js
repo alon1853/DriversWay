@@ -1,7 +1,7 @@
-import { decorate, computed, action, observable } from 'mobx';
+import { computed, observable } from 'mobx';
 
 class ObservableDriversStore {
-    drivers = [{
+    @observable drivers = [{
         id: 1,
         name: 'Hello World',
         age: 30,
@@ -24,9 +24,9 @@ class ObservableDriversStore {
         phone: '+972521234567'
     }];
 
-    driverFilter = '';
+    @observable driverFilter = '';
 
-    get filteredDrivers() {
+    @computed get filteredDrivers() {
         if (this.driverFilter) {
             return this.drivers.filter(
                 (driver) => driver.name.toLowerCase().includes(this.driverFilter.toLowerCase())
@@ -52,15 +52,6 @@ class ObservableDriversStore {
         this.driverFilter = filter;
     }
 }
-
-decorate(ObservableDriversStore, {
-    drivers: observable,
-    driverFilter: observable,
-    filteredDrivers: computed,
-    addDriver: action,
-    deleteDriver: action,
-    setDriverFilter: action
-});
 
 const observableDriversStore = new ObservableDriversStore();
 

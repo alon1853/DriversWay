@@ -1,8 +1,8 @@
-import { decorate, computed, action, observable, observe } from 'mobx';
+import { computed, observable, observe } from 'mobx';
 import observableDriversStore from './drivers-store';
 
 class TasksStore {
-    tasks = [{
+    @observable tasks = [{
         id: 1,
         title: 'Task #1',
         driverId: 1,
@@ -33,8 +33,8 @@ class TasksStore {
         }
     }];
 
-    driversToTasksMap = new Map();
-    filteredIds = [];
+    @observable driversToTasksMap = new Map();
+    @observable filteredIds = [];
     filterActivated = false;
 
     constructor() {
@@ -103,7 +103,7 @@ class TasksStore {
         this.driversToTasksMap.get(task.driverId).push(task);
     }
 
-    get filteredTasks() {
+    @computed get filteredTasks() {
         if (!this.filterActivated) {
             return this.tasks;
         }
@@ -125,17 +125,6 @@ class TasksStore {
         return [];
     }
 }
-
-decorate(TasksStore, {
-    tasks: observable,
-    driversToTasksMap: observable,
-    filteredIds: observable,
-    filterActivated: observable,
-    filteredTasks: computed,
-    addTask: action,
-    deleteTask: action,
-    insertTaskToMap: action
-});
 
 const observableTasksStore = new TasksStore();
 
