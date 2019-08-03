@@ -5,15 +5,16 @@
   width: 80%;
 
   h1 {
-    font-size: 22pt;
-    margin-bottom: 50px;
+    font-size: 4vh;
+    // margin-bottom: 25px;
+    // height: 10vh;
   }
 
-  .row {
+  .first-row {
     display: flex;
     flex-direction: row;
-    margin-bottom: 20px;
-    height: 350px;
+    margin-bottom: 3vh;
+    height: 45vh;
     
     .first {
       flex: 39% 1;
@@ -27,4 +28,8 @@
       flex: 2% 1;
     }
   }
+}
+
+.second-row {
+  height: 38vh;
 }
