@@ -1,0 +1,58 @@
+{
+    "drivers": [
+        {
+            "id": 1,
+            "name": "Hello World",
+            "age": 30,
+            "location": {
+                "latitude": 33,
+                "longitude": 33
+            },
+            "picture": "",
+            "phone": "+972521234567"
+        },
+        {
+            "id": 2,
+            "name": "Alon Yosef",
+            "age": 24,
+            "location": {
+                "latitude": 33,
+                "longitude": 33
+            },
+            "picture": "",
+            "phone": "+972521234567"
+        }
+    ],
+    "tasks": [
+        {
+            "id": 1,
+            "title": "Task #1",
+            "driverId": 1,
+            "scheduledFor": "02/08/2019",
+            "location": {
+                "latitude": 34,
+                "longitude": 34
+            }
+        },
+        {
+            "id": 2,
+            "title": "Task #2",
+            "driverId": 2,
+            "scheduledFor": "02/08/2019",
+            "location": {
+                "latitude": 34,
+                "longitude": 34
+            }
+        },
+        {
+            "id": 3,
+            "title": "Task #3",
+            "driverId": 2,
+            "scheduledFor": "02/08/2019",
+            "location": {
+                "latitude": 34,
+                "longitude": 34
+            }
+        }
+    ]
+}
