@@ -1,4 +1,4 @@
-import { computed, observable, action } from 'mobx';
+import { computed, observable, action, values } from 'mobx';
 
 class ObservableDriversStore {
     @observable drivers = [{
@@ -38,13 +38,15 @@ class ObservableDriversStore {
     }
 
     @computed get filteredDrivers() {
+        const drivers = values(this.driversMap);
+
         if (this.driverFilter) {
-            return Array.from(this.driversMap.values()).filter(
+            return drivers.filter(
                 (driver) => driver.name.toLowerCase().includes(this.driverFilter.toLowerCase())
             );
         }
 
-        return Array.from(this.driversMap.values());
+        return drivers;
     }
 
     @action addDriver(driver) {

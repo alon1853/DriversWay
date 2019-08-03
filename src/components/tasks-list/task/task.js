@@ -8,7 +8,7 @@ class Task extends Component {
     }
 
     getDrivers() {
-        return ['', ...Array.from(this.props.drivers.values())];
+        return ['', ...this.props.drivers];
     }
 
     handleTaskAssign(event) {

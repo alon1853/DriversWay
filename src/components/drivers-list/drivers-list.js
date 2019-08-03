@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './drivers-list.scss';
 import { observer } from 'mobx-react';
+import { values } from 'mobx';
 import Driver from './driver/driver';
 
 @observer
@@ -21,9 +22,7 @@ class DriversList extends Component {
     }
 
     getTasksForDriver(driverId) {
-        return Array.from(
-            this.props.tasksStore.driversToTasksMap.get(driverId).values()
-        );
+        return values(this.props.tasksStore.driversToTasksMap.get(driverId));
     }
 
     render() {

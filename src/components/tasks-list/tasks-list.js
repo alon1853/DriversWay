@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
+import { values } from 'mobx';
 import Task from './task/task';
 
 @observer
@@ -18,7 +19,7 @@ class TasksList extends Component {
         const tasks = this.props.tasksStore.filteredTasks.map((task) =>
             <Task key={task.id}
                 task={task}
-                drivers={this.props.driversStore.driversMap}
+                drivers={values(this.props.driversStore.driversMap)}
                 assignTaskToDriver={this.assignTaskToDriver}
             />
         );

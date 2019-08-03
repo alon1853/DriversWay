@@ -1,4 +1,4 @@
-import { computed, observable, action, observe } from 'mobx';
+import { computed, observable, action, observe, values } from 'mobx';
 import observableDriversStore from './drivers-store';
 
 class TasksStore {
@@ -43,6 +43,10 @@ class TasksStore {
 
         observe(observableDriversStore, 'driverFilter', (change) => {
             this.handleDriversFilterChange();
+        });
+
+        observe(observableDriversStore.driversMap, (change) => {
+            console.log(change);
         });
     }
 
@@ -104,21 +108,19 @@ class TasksStore {
 
     @computed get filteredTasks() {
         if (!this.filterActivated) {
-            return Array.from(this.tasksMap.values());
+            return values(this.tasksMap);
         }
 
         if (this.filteredIds.length > 0) {
-            let result = [];
+            let filteredTasks = [];
 
             for (const id of this.filteredIds) {
                 if (this.driversToTasksMap.has(id)) {
-                    for (const task of this.driversToTasksMap.get(id).values()) {
-                        result.push(task);
-                    }
+                    filteredTasks = values(this.driversToTasksMap.get(id));
                 }
             }
 
-            return result;
+            return filteredTasks;
         }
 
         return [];
