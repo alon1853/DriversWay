@@ -22,7 +22,11 @@ class DriversList extends Component {
     }
 
     getTasksForDriver(driverId) {
-        return values(this.props.tasksStore.driversToTasksMap.get(driverId));
+        if (this.props.tasksStore.driversToTasksMap.has(driverId)) {
+            return values(this.props.tasksStore.driversToTasksMap.get(driverId));
+        }
+
+        return [];
     }
 
     render() {
@@ -51,7 +55,7 @@ class DriversList extends Component {
 
                 <div className="component-devider"></div>
 
-                <div className="component-row">
+                <div className="component-row drivers-list">
                     {drivers}
                 </div>
             </div>

@@ -16,6 +16,10 @@ class TasksStore {
         observe(observableDriversStore, 'driverFilter', (change) => {
             this.handleDriversFilterChange();
         });
+
+        observe(observableDriversStore.driversMap, (change) => {
+            this.updateDriverInMap(change);
+        });
     }
 
     @action initTasksList() {
@@ -45,13 +49,41 @@ class TasksStore {
         )
     }
 
+    @action updateDriverInMap(change) {
+        switch (change.type) {
+            case 'add': {
+                this.addDriverToMap(change.newValue.id);
+
+                break;
+            }
+
+            case 'delete': {
+                this.deleteDriverFromMap(change.oldValue.id);
+
+                break;
+            }
+
+            default: {
+                break;
+            }
+        }
+    }
+
+    @action addDriverToMap(driverId) {
+        if (!this.driversToTasksMap.has(driverId)) {
+            this.driversToTasksMap.set(driverId, new Map());
+        }
+    }
+
+    @action deleteDriverFromMap(driverId) {
+        if (this.driversToTasksMap.has(driverId)) {
+            this.driversToTasksMap.delete(driverId);
+        }
+    }
+
     @action addTask(task) {
         this.tasksMap.set(task.id, task);
-
-        if (!this.driversToTasksMap.has(task.driverId)) {
-            this.driversToTasksMap.set(task.driverId, new Map());
-        }
-
+        this.addDriverToMap(task.driverId);
         this.driversToTasksMap.get(task.driverId).set(task.id, task);
     }
 
@@ -105,7 +137,7 @@ class TasksStore {
 
             for (const id of this.filteredIds) {
                 if (this.driversToTasksMap.has(id)) {
-                    filteredTasks = values(this.driversToTasksMap.get(id));
+                    filteredTasks = filteredTasks.concat(values(this.driversToTasksMap.get(id)));
                 }
             }
 
