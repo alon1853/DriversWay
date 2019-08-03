@@ -24,7 +24,7 @@ class Driver extends Component {
                 </div>
 
                 <div className="driver-actions">
-                    <span>Tasks: 0</span>
+                    <span>Tasks: {this.props.tasks.length}</span>
                     <div>
                         <button type="button" className="btn primary">Location</button>
                         <button type="button" className="btn error" onClick={this.handleRemove}>Remove</button>

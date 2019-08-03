@@ -13,16 +13,26 @@ class DriversList extends Component {
     }
 
     handleFilterChange(event) {
-        this.props.store.setDriverFilter(event.target.value);
+        this.props.driversStore.setDriverFilter(event.target.value);
     }
 
     deleteDriver(driverId) {
-        this.props.store.deleteDriver(driverId);
+        this.props.driversStore.deleteDriver(driverId);
+    }
+
+    getTasksForDriver(driverId) {
+        return Array.from(
+            this.props.tasksStore.driversToTasksMap.get(driverId).values()
+        );
     }
 
     render() {
-        const drivers = this.props.store.filteredDrivers.map((driver) =>
-            <Driver key={driver.id} driver={driver} deleteDriver={this.deleteDriver} />
+        const drivers = this.props.driversStore.filteredDrivers.map((driver) =>
+            <Driver key={driver.id}
+                driver={driver}
+                deleteDriver={this.deleteDriver}
+                tasks={this.getTasksForDriver(driver.id)}
+            />
         );
 
         return (
@@ -34,7 +44,7 @@ class DriversList extends Component {
                 <div className="component-row search-container">
                     <i className="material-icons">search</i>
                     <input type="text"
-                        value={this.props.store.driverFilter}
+                        value={this.props.driversStore.driverFilter}
                         onChange={this.handleFilterChange}
                         placeholder="Filter name"
                     />

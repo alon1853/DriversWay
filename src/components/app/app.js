@@ -18,7 +18,7 @@ function App() {
 
             <div className="row">
                 <div className="first">
-                    <DriversList store={observableDriversList} />
+                    <DriversList driversStore={observableDriversList} tasksStore={observableTasksList} />
                 </div>
 
                 <div className="second">

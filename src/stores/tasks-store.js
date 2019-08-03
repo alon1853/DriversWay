@@ -1,4 +1,4 @@
-import { computed, observable, observe } from 'mobx';
+import { computed, observable, action, observe } from 'mobx';
 import observableDriversStore from './drivers-store';
 
 class TasksStore {
@@ -33,79 +33,57 @@ class TasksStore {
         }
     }];
 
+    @observable tasksMap = new Map();
     @observable driversToTasksMap = new Map();
     @observable filteredIds = [];
-    filterActivated = false;
+    @observable filterActivated = false;
 
     constructor() {
-        this.mapTasksList();
-
-        // setTimeout(() => {
-        //     this.addTask({
-        //         id: 4,
-        //         title: 'Task #4',
-        //         driverId: 2,
-        //         location: {
-        //             latitude: 34,
-        //             longitude: 34
-        //         }
-        //     });
-        // }, 1000);
-
-        // setTimeout(() => {
-        //     this.deleteTask(4);
-        // }, 4000);
+        this.initTasksList();
 
         observe(observableDriversStore, 'driverFilter', (change) => {
-            this.filterActivated = (observableDriversStore.driverFilter !== '');
-            this.filteredIds = observableDriversStore.filteredDrivers.map(driver => driver.id);
+            this.handleDriversFilterChange();
         });
     }
 
-    mapTasksList() {
+    @action initTasksList() {
         for (const task of this.tasks) {
-            this.insertTaskToMap(task);
+            this.addTask(task);
         }
     }
 
-    addTask(task) {
-        this.tasks.push(task);
-        this.insertTaskToMap(task);
+    @action addTask(task) {
+        this.tasksMap.set(task.id, task);
+
+        if (!this.driversToTasksMap.has(task.driverId)) {
+            this.driversToTasksMap.set(task.driverId, new Map());
+        }
+
+        this.driversToTasksMap.get(task.driverId).set(task.id, task);
     }
 
-    deleteTask(taskId) {
-        const index = this.tasks.findIndex((task) => task.id === taskId);
+    @action deleteTask(taskId, driverId) {
+        if (this.tasksMap.has(taskId)) {
+            this.tasksMap.delete(taskId);
+        }
 
-        if (index !== -1) {
-            const driverId = this.tasks[index].driverId;
+        if (this.driversToTasksMap.has(driverId)) {
+            const tasksList = this.driversToTasksMap.get(driverId);
 
-            this.tasks.splice(index, 1);
-
-            if (this.driversToTasksMap.has(driverId)) {
-                const innerIndex = this.driversToTasksMap.get(driverId).findIndex((task) => task.id === taskId);
-
-                if (innerIndex !== -1) {
-                    this.driversToTasksMap.get(driverId).splice(innerIndex, 1);
-
-                    if (!this.driversToTasksMap.get(driverId).length) {
-                        this.driversToTasksMap.remove(driverId);
-                    }
-                }
+            if (tasksList.has(taskId)) {
+                this.tasksList.delete(taskId);
             }
         }
     }
 
-    insertTaskToMap(task) {
-        if (!this.driversToTasksMap.has(task.driverId)) {
-            this.driversToTasksMap.set(task.driverId, []);
-        }
-
-        this.driversToTasksMap.get(task.driverId).push(task);
+    @action handleDriversFilterChange() {
+        this.filterActivated = (observableDriversStore.driverFilter !== '');
+        this.filteredIds = observableDriversStore.filteredDrivers.map(driver => driver.id);
     }
 
     @computed get filteredTasks() {
         if (!this.filterActivated) {
-            return this.tasks;
+            return Array.from(this.tasksMap.values());
         }
 
         if (this.filteredIds.length > 0) {
@@ -113,7 +91,7 @@ class TasksStore {
 
             for (const id of this.filteredIds) {
                 if (this.driversToTasksMap.has(id)) {
-                    for (const task of this.driversToTasksMap.get(id)) {
+                    for (const task of this.driversToTasksMap.get(id).values()) {
                         result.push(task);
                     }
                 }
