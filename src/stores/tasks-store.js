@@ -25,7 +25,7 @@ class TasksStore {
     {
         id: 3,
         title: 'Task #3',
-        driverId: 2,
+        driverId: undefined,
         scheduledFor: '02/08/2019',
         location: {
             latitude: 34,
@@ -79,6 +79,27 @@ class TasksStore {
     @action handleDriversFilterChange() {
         this.filterActivated = (observableDriversStore.driverFilter !== '');
         this.filteredIds = observableDriversStore.filteredDrivers.map(driver => driver.id);
+    }
+
+    @action assignTaskToDriver(taskId, driverId) {
+        let oldDriverId;
+        const newDriverId = (Number.isNaN(driverId) ? undefined : driverId);
+
+        // Assign task to new driver
+        if (this.tasksMap.has(taskId)) {
+            oldDriverId = this.tasksMap.get(taskId).driverId;
+            this.tasksMap.set(taskId, { ...this.tasksMap.get(taskId), driverId: newDriverId });
+        }
+
+        // Unassign task from old driver (if there is)
+        if (oldDriverId !== undefined && this.driversToTasksMap.has(oldDriverId)) {
+            this.driversToTasksMap.get(oldDriverId).delete(taskId);
+        }
+
+        // Update new driver's task in drivers to tasks map
+        if (newDriverId !== null && this.driversToTasksMap.has(driverId)) {
+            this.driversToTasksMap.get(driverId).set(taskId, this.tasksMap.get(taskId));
+        }
     }
 
     @computed get filteredTasks() {

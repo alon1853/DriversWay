@@ -26,7 +26,7 @@ function App() {
                 </div>
             </div>
 
-            <TasksList store={observableTasksList} />
+            <TasksList tasksStore={observableTasksList} driversStore={observableDriversList} />
         </div>
     );
 }

@@ -4,9 +4,23 @@ import Task from './task/task';
 
 @observer
 class TasksList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.assignTaskToDriver = this.assignTaskToDriver.bind(this);
+    }
+
+    assignTaskToDriver(taskId, driverId) {
+        this.props.tasksStore.assignTaskToDriver(taskId, driverId);
+    }
+
     render() {
-        const tasks = this.props.store.filteredTasks.map((task) =>
-            <Task key={task.id} task={task} />
+        const tasks = this.props.tasksStore.filteredTasks.map((task) =>
+            <Task key={task.id}
+                task={task}
+                drivers={this.props.driversStore.driversMap}
+                assignTaskToDriver={this.assignTaskToDriver}
+            />
         );
 
         return (
