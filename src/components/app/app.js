@@ -1,6 +1,6 @@
 import React from 'react';
 import './app.scss';
-import Map from '../map/map';
+import DriversMap from '../drivers-map/drivers-map';
 import DriversList from '../drivers-list/drivers-list';
 import observableDriversList from '../../stores/drivers-store';
 import TasksList from '../tasks-list/tasks-list';
@@ -24,7 +24,7 @@ function App() {
                 <div className="space"></div>
 
                 <div className="second">
-                    <Map />
+                    <DriversMap />
                 </div>
             </div>
 
