@@ -1,40 +1,41 @@
-import { computed, observable, action, values } from 'mobx';
+import { configure, computed, observable, runInAction, action, values } from 'mobx';
+
+configure({ enforceActions: 'observed' });
 
 class ObservableDriversStore {
-    @observable drivers = [{
-        id: 1,
-        name: 'Hello World',
-        age: 30,
-        location: {
-            latitude: 33,
-            longitude: 33
-        },
-        picture: '',
-        phone: '+972521234567'
-    },
-    {
-        id: 2,
-        name: 'Alon Yosef',
-        age: 24,
-        location: {
-            latitude: 33,
-            longitude: 33
-        },
-        picture: '',
-        phone: '+972521234567'
-    }];
-
+    @observable drivers = [];
     @observable driversMap = new Map();
     @observable driverFilter = '';
 
     constructor() {
-        this.initDriversMap();
+        this.fetchDrivers();
     }
 
     @action initDriversMap() {
         for (const driver of this.drivers) {
             this.addDriver(driver);
         }
+    }
+
+    @action fetchDrivers() {
+        this.drivers = [];
+
+        fetch('http://my-json-server.typicode.com/alon1853/DriversWay/drivers').then(
+            (response) => {
+                response.json().then(
+                    (drivers) => {
+                        runInAction(() => {
+                            this.drivers = drivers;
+                        });
+
+                        this.initDriversMap();
+                    }
+                );
+            },
+            (error) => {
+                console.error(error);
+            }
+        )
     }
 
     @computed get filteredDrivers() {

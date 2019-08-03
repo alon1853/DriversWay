@@ -1,59 +1,48 @@
-import { computed, observable, action, observe, values } from 'mobx';
+import { configure, computed, observable, runInAction, action, observe, values } from 'mobx';
 import observableDriversStore from './drivers-store';
 
-class TasksStore {
-    @observable tasks = [{
-        id: 1,
-        title: 'Task #1',
-        driverId: 1,
-        scheduledFor: '02/08/2019',
-        location: {
-            latitude: 34,
-            longitude: 34
-        }
-    },
-    {
-        id: 2,
-        title: 'Task #2',
-        driverId: 2,
-        scheduledFor: '02/08/2019',
-        location: {
-            latitude: 34,
-            longitude: 34
-        }
-    },
-    {
-        id: 3,
-        title: 'Task #3',
-        driverId: undefined,
-        scheduledFor: '02/08/2019',
-        location: {
-            latitude: 34,
-            longitude: 34
-        }
-    }];
+configure({ enforceActions: 'observed' });
 
+class TasksStore {
+    @observable tasks = [];
     @observable tasksMap = new Map();
     @observable driversToTasksMap = new Map();
     @observable filteredIds = [];
     @observable filterActivated = false;
 
     constructor() {
-        this.initTasksList();
+        this.fetchTasks();
 
         observe(observableDriversStore, 'driverFilter', (change) => {
             this.handleDriversFilterChange();
         });
-
-        // observe(observableDriversStore.driversMap, (change) => {
-        // console.log(change);
-        // });
     }
 
     @action initTasksList() {
         for (const task of this.tasks) {
             this.addTask(task);
         }
+    }
+
+    @action fetchTasks() {
+        this.tasks = [];
+
+        fetch('http://my-json-server.typicode.com/alon1853/DriversWay/tasks').then(
+            (response) => {
+                response.json().then(
+                    (tasks) => {
+                        runInAction(() => {
+                            this.tasks = tasks;
+                        });
+
+                        this.initTasksList();
+                    }
+                );
+            },
+            (error) => {
+                console.error(error);
+            }
+        )
     }
 
     @action addTask(task) {
