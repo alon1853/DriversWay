@@ -24,7 +24,7 @@ function App() {
                 <div className="space"></div>
 
                 <div className="second">
-                    <DriversMap />
+                    <DriversMap driversStore={observableDriversList} tasksStore={observableTasksList} />
                 </div>
             </div>
 
