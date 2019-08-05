@@ -10,10 +10,15 @@ class TasksList extends Component {
         super(props);
 
         this.assignTaskToDriver = this.assignTaskToDriver.bind(this);
+        this.toggleDisplayTask = this.toggleDisplayTask.bind(this);
     }
 
     assignTaskToDriver(taskId, driverId) {
         this.props.tasksStore.assignTaskToDriver(taskId, driverId);
+    }
+
+    toggleDisplayTask(taskId) {
+        this.props.driversMapStore.toggleDisplayTask(taskId);
     }
 
     render() {
@@ -22,6 +27,8 @@ class TasksList extends Component {
                 task={task}
                 drivers={values(this.props.driversStore.driversMap)}
                 assignTaskToDriver={this.assignTaskToDriver}
+                checked={this.props.driversMapStore.displayedTasks.has(task.id)}
+                toggleDisplayTask={this.toggleDisplayTask}
             />
         );
 

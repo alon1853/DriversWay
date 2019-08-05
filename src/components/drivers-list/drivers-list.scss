@@ -14,3 +14,15 @@
     min-height: 210px;
     overflow: auto;
 }
+
+.material-icons {
+    vertical-align: middle;
+}
+
+.sortButton {
+    cursor: pointer;
+}
+
+.sortButton:first-child {
+    margin-right: 5px;
+}

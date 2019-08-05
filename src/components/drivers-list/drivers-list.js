@@ -67,11 +67,12 @@ class DriversList extends Component {
                 <div className="component-row">
                     <i className="material-icons">sort</i>
                     <div style={{ marginLeft: '10px', display: 'inline-flex' }}>
-                        <span>
-                            <i className="material-icons">arrow_drop_down</i>Name
+                        <span className="sortButton">
+                            Name<i className="material-icons">arrow_drop_down</i>
                         </span>
-                        <span>
-                            <i className="material-icons">arrow_drop_down</i>Age
+
+                        <span className="sortButton">
+                            Age<i className="material-icons">arrow_drop_down</i>
                         </span>
                     </div>
                 </div >

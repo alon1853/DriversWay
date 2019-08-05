@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 
 class DriversMapStore {
     @observable mapCenter = [];
+    @observable displayedTasks = new Map();
 
     constructor() {
         this.initMapCenter();
@@ -13,6 +14,14 @@ class DriversMapStore {
 
     @action setMapCenter(center) {
         this.mapCenter = center;
+    }
+
+    @action toggleDisplayTask(taskId) {
+        if (this.displayedTasks.has(taskId)) {
+            this.displayedTasks.delete(taskId);
+        } else {
+            this.displayedTasks.set(taskId, true);
+        }
     }
 }
 

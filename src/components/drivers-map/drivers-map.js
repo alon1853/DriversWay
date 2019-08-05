@@ -25,11 +25,13 @@ class DriversMap extends Component {
             </Marker>
         );
 
-        const tasksMarkers = this.props.tasksStore.filteredTasks.map(task =>
-            <Marker key={task.id} position={[task.location.longitude, task.location.latitude]} icon={flagIcon}>
-                <Popup>{task.title}</Popup>
-            </Marker>
-        );
+        const tasksMarkers = this.props.tasksStore.filteredTasks
+            .filter(task => this.props.driversMapStore.displayedTasks.has(task.id))
+            .map(task =>
+                <Marker key={task.id} position={[task.location.longitude, task.location.latitude]} icon={flagIcon}>
+                    <Popup>{task.title}</Popup>
+                </Marker>
+            );
 
         return (
             <Map center={this.props.driversMapStore.mapCenter} zoom={13} style={{ "width": "100%", "height": "100%" }}>
