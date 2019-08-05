@@ -5,6 +5,7 @@ import DriversList from '../drivers-list/drivers-list';
 import observableDriversList from '../../stores/drivers-store';
 import TasksList from '../tasks-list/tasks-list';
 import observableTasksList from '../../stores/tasks-store';
+import observableDriversMapStore from '../../stores/drivers-map-store';
 
 function App() {
     return (
@@ -18,13 +19,19 @@ function App() {
 
             <div className="first-row">
                 <div className="first">
-                    <DriversList driversStore={observableDriversList} tasksStore={observableTasksList} />
+                    <DriversList driversStore={observableDriversList}
+                        tasksStore={observableTasksList}
+                        driversMapStore={observableDriversMapStore}
+                    />
                 </div>
 
                 <div className="space"></div>
 
                 <div className="second">
-                    <DriversMap driversStore={observableDriversList} tasksStore={observableTasksList} />
+                    <DriversMap driversStore={observableDriversList}
+                        tasksStore={observableTasksList}
+                        driversMapStore={observableDriversMapStore}
+                    />
                 </div>
             </div>
 

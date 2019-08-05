@@ -37,6 +37,28 @@ class TasksStore {
                     (tasks) => {
                         runInAction(() => {
                             this.tasks = tasks;
+                            this.tasks.push(
+                                {
+                                    "id": 4,
+                                    "title": "Task #4",
+                                    "driverId": undefined,
+                                    "scheduledFor": "02/08/2019",
+                                    "location": {
+                                        "latitude": -0.090,
+                                        "longitude": 51.5050
+                                    }
+                                },
+                                {
+                                    "id": 5,
+                                    "title": "Task #5",
+                                    "driverId": undefined,
+                                    "scheduledFor": "02/08/2019",
+                                    "location": {
+                                        "latitude": 34,
+                                        "longitude": 34
+                                    }
+                                }
+                            );
                         });
 
                         this.initTasksList();

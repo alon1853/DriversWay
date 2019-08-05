@@ -11,6 +11,7 @@ class DriversList extends Component {
 
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.deleteDriver = this.deleteDriver.bind(this);
+        this.locateDriver = this.locateDriver.bind(this);
     }
 
     handleFilterChange(event) {
@@ -19,6 +20,13 @@ class DriversList extends Component {
 
     deleteDriver(driverId) {
         this.props.driversStore.deleteDriver(driverId);
+    }
+
+    locateDriver(driverId) {
+        if (this.props.driversStore.driversMap.has(driverId)) {
+            const driverLocation = this.props.driversStore.driversMap.get(driverId).location;
+            this.props.driversMapStore.setMapCenter([driverLocation.longitude, driverLocation.latitude]);
+        }
     }
 
     getTasksForDriver(driverId) {
@@ -34,6 +42,7 @@ class DriversList extends Component {
             <Driver key={driver.id}
                 driver={driver}
                 deleteDriver={this.deleteDriver}
+                locateDriver={this.locateDriver}
                 tasks={this.getTasksForDriver(driver.id)}
             />
         );
@@ -55,10 +64,24 @@ class DriversList extends Component {
 
                 <div className="component-devider"></div>
 
+                <div className="component-row">
+                    <i className="material-icons">sort</i>
+                    <div style={{ marginLeft: '10px', display: 'inline-flex' }}>
+                        <span>
+                            <i className="material-icons">arrow_drop_down</i>Name
+                        </span>
+                        <span>
+                            <i className="material-icons">arrow_drop_down</i>Age
+                        </span>
+                    </div>
+                </div >
+
+                <div className="component-devider"></div>
+
                 <div className="component-row drivers-list">
                     {drivers}
                 </div>
-            </div>
+            </div >
         );
     }
 }

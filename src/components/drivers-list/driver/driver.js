@@ -6,10 +6,15 @@ class Driver extends Component {
         super(props);
 
         this.handleRemove = this.handleRemove.bind(this);
+        this.handleLocate = this.handleLocate.bind(this);
     }
 
     handleRemove() {
         this.props.deleteDriver(this.props.driver.id);
+    }
+
+    handleLocate() {
+        this.props.locateDriver(this.props.driver.id);
     }
 
     render() {
@@ -26,7 +31,7 @@ class Driver extends Component {
                 <div className="driver-actions">
                     <span>Tasks: {this.props.tasks.length}</span>
                     <div>
-                        <button type="button" className="btn primary">Location</button>
+                        <button type="button" className="btn primary" onClick={this.handleLocate}>Location</button>
                         <button type="button" className="btn error" onClick={this.handleRemove}>Remove</button>
                     </div>
                 </div>

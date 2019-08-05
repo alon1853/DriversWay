@@ -9,12 +9,11 @@ import flag from './flag.svg';
 @observer
 class DriversMap extends Component {
     render() {
-        const position = [51.505, -0.09];
-
         const truckIcon = new L.Icon({
             iconUrl: truck,
             iconSize: [28, 28]
         });
+
         const flagIcon = new L.Icon({
             iconUrl: flag,
             iconSize: [28, 28]
@@ -33,7 +32,7 @@ class DriversMap extends Component {
         );
 
         return (
-            <Map center={position} zoom={13} style={{ "width": "100%", "height": "100%" }}>
+            <Map center={this.props.driversMapStore.mapCenter} zoom={13} style={{ "width": "100%", "height": "100%" }}>
                 <TileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
