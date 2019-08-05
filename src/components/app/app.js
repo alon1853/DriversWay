@@ -12,7 +12,7 @@ function App() {
         <div className="app-container">
             <header>
                 <h1>
-                    <span role="img" aria-label="truck">🚚</span>
+                    <span role="img" aria-label="truck">🏄🏻‍♂️</span>
                     <span> Drivers Way</span>
                 </h1>
             </header>
@@ -35,9 +35,7 @@ function App() {
                 </div>
             </div>
 
-            <div className="second-row">
-                <TasksList tasksStore={observableTasksList} driversStore={observableDriversList} />
-            </div>
+            <TasksList tasksStore={observableTasksList} driversStore={observableDriversList} />
         </div>
     );
 }

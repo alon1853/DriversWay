@@ -10,6 +10,7 @@
 }
 
 .drivers-list {
-    height: calc(45vh - 151px);
+    height: 210px;
+    min-height: 210px;
     overflow: auto;
 }
