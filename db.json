@@ -54,7 +54,8 @@
             "location": {
                 "latitude": 34,
                 "longitude": 34
-            }
+            },
+            "address": "1 Habarzel St. Tel Aviv, Israel"
         },
         {
             "id": 2,
@@ -64,7 +65,8 @@
             "location": {
                 "latitude": 34,
                 "longitude": 34
-            }
+            },
+            "address": "1 Habarzel St. Tel Aviv, Israel"
         },
         {
             "id": 3,
@@ -74,7 +76,8 @@
             "location": {
                 "latitude": 34,
                 "longitude": 34
-            }
+            },
+            "address": "1 Habarzel St. Tel Aviv, Israel"
         },
         {
             "id": 4,
@@ -84,7 +87,8 @@
             "location": {
                 "latitude": -0.090,
                 "longitude": 51.5050
-            }
+            },
+            "address": "1 Habarzel St. Tel Aviv, Israel"
         },
         {
             "id": 5,
@@ -94,7 +98,8 @@
             "location": {
                 "latitude": 34,
                 "longitude": 34
-            }
+            },
+            "address": "1 Habarzel St. Tel Aviv, Israel"
         }
     ]
 }
