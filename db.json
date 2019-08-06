@@ -5,8 +5,8 @@
             "name": "Hello World",
             "age": 30,
             "location": {
-                "latitude": 33,
-                "longitude": 33
+                "latitude": 33.5,
+                "longitude": 33.5
             },
             "picture": "",
             "phone": "+972521234567"
@@ -16,8 +16,8 @@
             "name": "Alon Yosef",
             "age": 24,
             "location": {
-                "latitude": 33,
-                "longitude": 33
+                "latitude": 34,
+                "longitude": 34
             },
             "picture": "",
             "phone": "+972521234567"
@@ -38,8 +38,8 @@
             "name": "Foo2 Bar2",
             "age": 30,
             "location": {
-                "latitude": 33,
-                "longitude": 33
+                "latitude": 34.5,
+                "longitude": 34.5
             },
             "picture": "",
             "phone": "+972521234567"
@@ -52,8 +52,8 @@
             "driverId": 1,
             "scheduledFor": "02/08/2019",
             "location": {
-                "latitude": 34,
-                "longitude": 34
+                "latitude": 32.5,
+                "longitude": 33
             },
             "address": "1 Habarzel St. Tel Aviv, Israel"
         },
@@ -63,8 +63,8 @@
             "driverId": 2,
             "scheduledFor": "02/08/2019",
             "location": {
-                "latitude": 34,
-                "longitude": 34
+                "latitude": 33,
+                "longitude": 32.5
             },
             "address": "1 Habarzel St. Tel Aviv, Israel"
         },
@@ -75,7 +75,7 @@
             "scheduledFor": "02/08/2019",
             "location": {
                 "latitude": 34,
-                "longitude": 34
+                "longitude": 34.5
             },
             "address": "1 Habarzel St. Tel Aviv, Israel"
         },
@@ -96,7 +96,7 @@
             "driverId": null,
             "scheduledFor": "02/08/2019",
             "location": {
-                "latitude": 34,
+                "latitude": 34.5,
                 "longitude": 34
             },
             "address": "1 Habarzel St. Tel Aviv, Israel"
