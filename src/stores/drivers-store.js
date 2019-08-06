@@ -7,11 +7,12 @@ class ObservableDriversStore {
     @observable driversMap = new Map();
     @observable driverFilter = '';
     @observable sortBy = '';
-    @observable sortAscending = -1;
+    @observable sortAscending;
 
     constructor() {
         this.fetchDrivers();
-        this.setSortByAge();
+        this.initSortDirection();
+        this.setSortByName();
     }
 
     @action initDriversMap() {
@@ -83,12 +84,30 @@ class ObservableDriversStore {
         this.sortAscending *= -1;
     }
 
+    @action initSortDirection() {
+        this.sortAscending = 1;
+    }
+
     @action setSortByName() {
-        this.sortBy = 'name';
+        if (this.sortBy !== 'name') {
+            this.sortBy = 'name';
+            this.initSortDirection();
+        } else {
+            this.toogleSortOrder();
+        }
     }
 
     @action setSortByAge() {
-        this.sortBy = 'age';
+        if (this.sortBy !== 'age') {
+            this.sortBy = 'age';
+            this.initSortDirection();
+        } else {
+            this.toogleSortOrder();
+        }
+    }
+
+    @action toogleSortOrder() {
+        this.sortAscending *= -1;
     }
 
     sortByName(driverA, driverB) {

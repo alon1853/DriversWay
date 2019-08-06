@@ -12,6 +12,8 @@ class DriversList extends Component {
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.deleteDriver = this.deleteDriver.bind(this);
         this.locateDriver = this.locateDriver.bind(this);
+        this.handleSortByName = this.handleSortByName.bind(this);
+        this.handleSortByAge = this.handleSortByAge.bind(this);
     }
 
     handleFilterChange(event) {
@@ -29,12 +31,31 @@ class DriversList extends Component {
         }
     }
 
+    handleSortByName() {
+        this.props.driversStore.setSortByName();
+    }
+
+    handleSortByAge() {
+        this.props.driversStore.setSortByAge();
+    }
+
     getTasksForDriver(driverId) {
         if (this.props.tasksStore.driversToTasksMap.has(driverId)) {
             return values(this.props.tasksStore.driversToTasksMap.get(driverId));
         }
 
         return [];
+    }
+
+    getOrderArrow(propertyName) {
+        let arrow = '';
+
+        if (this.props.driversStore.sortBy === propertyName) {
+            arrow = (this.props.driversStore.sortAscending === 1) ? 'arrow_drop_down' : 'arrow_drop_up';
+        }
+
+
+        return (<i className="material-icons">{arrow}</i>);
     }
 
     render() {
@@ -67,12 +88,12 @@ class DriversList extends Component {
                 <div className="component-row">
                     <i className="material-icons">sort</i>
                     <div style={{ marginLeft: '10px', display: 'inline-flex' }}>
-                        <span className="sortButton">
-                            Name<i className="material-icons">arrow_drop_down</i>
+                        <span className="sortButton" onClick={this.handleSortByName}>
+                            Name{this.getOrderArrow('name')}
                         </span>
 
-                        <span className="sortButton">
-                            Age<i className="material-icons">arrow_drop_down</i>
+                        <span className="sortButton" onClick={this.handleSortByAge}>
+                            Age{this.getOrderArrow('age')}
                         </span>
                     </div>
                 </div >
