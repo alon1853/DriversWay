@@ -2,6 +2,9 @@ import { configure, computed, observable, runInAction, action, values } from 'mo
 
 configure({ enforceActions: 'observed' });
 
+export const NAME = 'name';
+export const AGE = 'age';
+
 class ObservableDriversStore {
     @observable drivers = [];
     @observable driversMap = new Map();
@@ -46,11 +49,11 @@ class ObservableDriversStore {
         const drivers = values(this.driversMap);
 
         switch (this.sortBy) {
-            case 'age': {
+            case AGE: {
                 drivers.sort(this.sortByAge.bind(this));
                 break;
             }
-            case 'name':
+            case NAME:
             default: {
                 drivers.sort(this.sortByName.bind(this));
                 break;
@@ -89,8 +92,8 @@ class ObservableDriversStore {
     }
 
     @action setSortByName() {
-        if (this.sortBy !== 'name') {
-            this.sortBy = 'name';
+        if (this.sortBy !== NAME) {
+            this.sortBy = NAME;
             this.initSortDirection();
         } else {
             this.toogleSortOrder();
@@ -98,8 +101,8 @@ class ObservableDriversStore {
     }
 
     @action setSortByAge() {
-        if (this.sortBy !== 'age') {
-            this.sortBy = 'age';
+        if (this.sortBy !== AGE) {
+            this.sortBy = AGE;
             this.initSortDirection();
         } else {
             this.toogleSortOrder();

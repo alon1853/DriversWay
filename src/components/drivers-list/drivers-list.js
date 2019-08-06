@@ -3,6 +3,7 @@ import './drivers-list.scss';
 import { observer } from 'mobx-react';
 import { values } from 'mobx';
 import Driver from './driver/driver';
+import { NAME, AGE } from '../../stores/drivers-store';
 
 @observer
 class DriversList extends Component {
@@ -89,11 +90,11 @@ class DriversList extends Component {
                     <i className="material-icons">sort</i>
                     <div style={{ marginLeft: '10px', display: 'inline-flex' }}>
                         <span className="sortButton" onClick={this.handleSortByName}>
-                            Name{this.getOrderArrow('name')}
+                            Name{this.getOrderArrow(NAME)}
                         </span>
 
                         <span className="sortButton" onClick={this.handleSortByAge}>
-                            Age{this.getOrderArrow('age')}
+                            Age{this.getOrderArrow(AGE)}
                         </span>
                     </div>
                 </div >
